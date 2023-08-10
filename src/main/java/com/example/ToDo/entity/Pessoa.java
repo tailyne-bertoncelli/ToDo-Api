@@ -8,11 +8,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tb_pessoas", schema = "public")
-@AllArgsConstructor
 @NoArgsConstructor
 public class Pessoa {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Long id;
 
     @Getter @Setter
@@ -21,4 +21,9 @@ public class Pessoa {
     @Getter @Setter
     private String email;
 
+    public Pessoa(Long id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
 }

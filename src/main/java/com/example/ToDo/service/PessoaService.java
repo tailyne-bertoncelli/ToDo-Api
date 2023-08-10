@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PessoaService {
 
@@ -23,5 +25,22 @@ public class PessoaService {
 
         this.pessoaRepository.save(new Pessoa(null, pessoaDTO.nome(), pessoaDTO.email()));
         return ResponseEntity.ok(pessoaDTO);
+    }
+
+    public Pessoa findById(Long id) {
+        Optional<Pessoa> pessoa = this.pessoaRepository.findById(id);
+        return pessoa.orElseThrow(() -> new RuntimeException("Pessoa não encontrada!"));
+    }
+
+
+    public void alterar(Pessoa pessoa) {
+        if (!pessoaRepository.existsById(pessoa.getId())){
+            throw new RuntimeException("Pessoa informada não existe!");
+        }
+        this.pessoaRepository.save(pessoa);
+    }
+
+    public void deleta(Pessoa pessoa) {
+        this.pessoaRepository.delete(pessoa);
     }
 }
