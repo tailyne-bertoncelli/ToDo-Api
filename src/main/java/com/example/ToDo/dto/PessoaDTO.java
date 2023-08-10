@@ -1,2 +1,4 @@
-package com.example.ToDo.dto;public record PessoaDTO() {
+package com.example.ToDo.dto;
+
+public record PessoaDTO(String nome, String email) {
 }
