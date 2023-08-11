@@ -8,6 +8,7 @@ import com.example.ToDo.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,8 @@ public class LembreteService {
         if (!pessoaRepository.existsById(lembreteDTO.getPessoa_id())){
             throw new RuntimeException("Pessoa informada não existe!");
         }
-        this.lembreteRepository.save(new Lembretes(null, lembreteDTO.getRecado(), lembreteDTO.getPessoa_id()));
+        var pessoa = pessoaRepository.getReferenceById(lembreteDTO.getPessoa_id());
+        lembreteRepository.save(new Lembretes(null, lembreteDTO.getRecado(), pessoa));
     }
 
 
@@ -31,4 +33,12 @@ public class LembreteService {
         return lembrete.orElseThrow(() -> new RuntimeException("Pessoa não encontrada!"));
     }
 
+
+    public List<Lembretes> buscaPeloNome(String nome) {
+        List<Lembretes> lembretesList = this.lembreteRepository.buscaLembretesPeloNome(nome);
+        if (lembretesList.isEmpty()){
+            throw new RuntimeException("Essa pessoa não possui nenhum lembrete ou não foi cadastrada!");
+        }
+        return lembretesList;
+    }
 }

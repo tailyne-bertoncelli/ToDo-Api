@@ -23,4 +23,9 @@ public class Lembretes {
     @Getter @Setter
     private Pessoa pessoa;
 
+    public Lembretes(Long id, String recado, Pessoa pessoa) {
+        this.id = id;
+        this.recado = recado;
+        this.pessoa = pessoa;
+    }
 }
