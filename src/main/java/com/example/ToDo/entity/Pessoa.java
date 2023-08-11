@@ -24,9 +24,6 @@ public class Pessoa {
     @Getter @Setter
     private String email;
 
-    @Getter @Setter
-    @OneToMany(mappedBy = "pessoa")
-    private List<Lembretes> lembretesList = new ArrayList<>();
 
     public Pessoa(Long id, String nome, String email) {
         this.id = id;

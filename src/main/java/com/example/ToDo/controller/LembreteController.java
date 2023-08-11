@@ -14,9 +14,10 @@ public class LembreteController {
     private LembreteService lembreteService;
 
     @PostMapping
-    public ResponseEntity<?> cadastra(LembreteDTO lembreteDTO){
+    public ResponseEntity cadastra(LembreteDTO lembreteDTO){
         try {
-            return ResponseEntity.ok(this.lembreteService.cadastra(lembreteDTO));
+            this.lembreteService.cadastra(lembreteDTO);
+            return ResponseEntity.ok("Registro cadastrado com sucesso!");
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
