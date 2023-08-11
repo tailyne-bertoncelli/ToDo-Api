@@ -25,11 +25,11 @@ public class PessoaController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<?> buscaPeloId(@RequestBody PessoaDTO pessoaDTO){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscaPeloId(@PathVariable Long id){
         try {
-            this.pessoaService.findById(pessoaDTO.id());
-            return ResponseEntity.ok(pessoaDTO);
+            this.pessoaService.findById(id);
+            return ResponseEntity.ok(this.pessoaService.findById(id));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_pessoas", schema = "public")
 @NoArgsConstructor
@@ -20,6 +23,10 @@ public class Pessoa {
 
     @Getter @Setter
     private String email;
+
+    @Getter @Setter
+    @OneToMany(mappedBy = "pessoa")
+    private List<Lembretes> lembretesList = new ArrayList<>();
 
     public Pessoa(Long id, String nome, String email) {
         this.id = id;
