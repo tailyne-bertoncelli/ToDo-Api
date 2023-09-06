@@ -23,9 +23,6 @@ class ToDoApplicationTests {
 	private PessoaRepository pessoaRepository;
 	@Autowired
 	private final PessoaService pessoaService = new PessoaService();
-//	@Test
-//	void contextLoads() {
-//	}
 
 	@BeforeEach
 	void obj(){
@@ -38,6 +35,7 @@ class ToDoApplicationTests {
 		pessoaList.add(new Pessoa(2L, "Alana", "alana@gmail.com"));
 		pessoaList.add(new Pessoa(3L, "João", "joao@gmail.com"));
 		Mockito.when(pessoaRepository.findAll()).thenReturn(pessoaList);
+
 	}
 
 	@BeforeEach
@@ -66,10 +64,12 @@ class ToDoApplicationTests {
 
 	@Test
 	void testUpdate(){
-		Long id = 1L;
-		Pessoa pessoa = pessoaService.findById(id);
+//		Long id = 1L;
+//		Pessoa pessoa = pessoaService.findById(id);
+		Pessoa pessoa = new Pessoa(1L, "Tailyne", "tailyne@tr1.com.br");
+		PessoaDTO pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getEmail());
 		var pessoaAlterada = pessoaService.alterar(pessoa);
-		Assert.assertEquals(pessoa, pessoaAlterada);
+		Assert.assertEquals(pessoaDTO.getNome(), pessoaAlterada.getNome());
 	}
 
 }

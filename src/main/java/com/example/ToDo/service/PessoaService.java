@@ -34,11 +34,16 @@ public class PessoaService {
 
 
     public PessoaDTO alterar(Pessoa pessoa) {
-        if (!pessoaRepository.existsById(pessoa.getId())){
-            throw new RuntimeException("Pessoa informada não existe!");
-        }
-        this.pessoaRepository.save(pessoa);
-        PessoaDTO pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getEmail());
+//        if (!pessoaRepository.existsById(pessoa.getId())){
+//            throw new RuntimeException("Pessoa informada não existe!");
+//        }
+        Pessoa pessoa1 = pessoaRepository.findById(pessoa.getId())
+                .orElseThrow(()-> new RuntimeException("Pessoa não encontrada!"));
+        pessoa1.setNome(pessoa.getNome());
+        pessoa1.setEmail(pessoa.getEmail());
+
+        this.pessoaRepository.save(pessoa1);
+        PessoaDTO pessoaDTO = new PessoaDTO(pessoa1.getId(), pessoa1.getNome(), pessoa1.getEmail());
         return pessoaDTO;
     }
 
