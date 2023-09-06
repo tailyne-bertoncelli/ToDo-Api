@@ -15,7 +15,7 @@ import java.util.List;
 public class Pessoa {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
+    @Getter @Setter
     private Long id;
 
     @Getter @Setter
@@ -30,4 +30,6 @@ public class Pessoa {
         this.nome = nome;
         this.email = email;
     }
+
+
 }

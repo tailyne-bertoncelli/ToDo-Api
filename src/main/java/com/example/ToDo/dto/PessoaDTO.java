@@ -1,4 +1,19 @@
 package com.example.ToDo.dto;
 
-public record PessoaDTO(Long id, String nome, String email) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+public class PessoaDTO {
+        @Getter @Setter
+        Long id;
+        @Getter @Setter
+        String nome;
+        @Getter @Setter
+        String email;
+
+
 }
