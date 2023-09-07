@@ -47,7 +47,8 @@ public class PessoaService {
         return pessoaDTO;
     }
 
-    public void deleta(Pessoa pessoa) {
+    public String deleta(Pessoa pessoa) {
         this.pessoaRepository.delete(pessoa);
+        return "Pessoa deletada com sucesso!";
     }
 }

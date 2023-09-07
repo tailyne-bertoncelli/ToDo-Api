@@ -64,12 +64,19 @@ class ToDoApplicationTests {
 
 	@Test
 	void testUpdate(){
-//		Long id = 1L;
-//		Pessoa pessoa = pessoaService.findById(id);
 		Pessoa pessoa = new Pessoa(1L, "Tailyne", "tailyne@tr1.com.br");
 		PessoaDTO pessoaDTO = new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getEmail());
 		var pessoaAlterada = pessoaService.alterar(pessoa);
 		Assert.assertEquals(pessoaDTO.getNome(), pessoaAlterada.getNome());
 	}
+
+	@Test
+	void testDeleta(){
+		Pessoa pessoa = new Pessoa(1L, "Tailyne", "tailyne@tr1.com.br");
+		var metodo = pessoaService.deleta(pessoa);
+		Assert.assertEquals("Pessoa deletada com sucesso!", metodo);
+	}
+
+
 
 }

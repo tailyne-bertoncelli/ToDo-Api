@@ -19,18 +19,20 @@ public class LembreteService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public void cadastra(LembreteDTO lembreteDTO) {
-        if (!pessoaRepository.existsById(lembreteDTO.getPessoa_id())){
-            throw new RuntimeException("Pessoa informada não existe!");
-        }
-        var pessoa = pessoaRepository.getReferenceById(lembreteDTO.getPessoa_id());
-        lembreteRepository.save(new Lembretes(null, lembreteDTO.getRecado(), pessoa));
+    public LembreteDTO cadastra(LembreteDTO lembreteDTO) {
+        Pessoa pessoa = pessoaRepository.findById(lembreteDTO.getPessoa_id())
+                .orElseThrow(()-> new RuntimeException("Pessoa informada não existe!"));
+        Lembretes lembretes = new Lembretes(null, lembreteDTO.getRecado(), pessoa);
+        lembreteRepository.save(lembretes);
+        LembreteDTO lembreteDTO1 = new LembreteDTO(lembretes);
+        return lembreteDTO1;
     }
 
 
     public Lembretes buscaPeloId(Long id) {
-        Optional<Lembretes> lembrete = this.lembreteRepository.findById(id);
-        return lembrete.orElseThrow(() -> new RuntimeException("Pessoa não encontrada!"));
+        Lembretes lembrete = this.lembreteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada!"));
+        return lembrete;
     }
 
 
